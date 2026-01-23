@@ -1,0 +1,57 @@
+
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+# https://github.com/orgs/community/discussions/47855
+name: cron
+on:
+  push:
+    branches:
+      - beta
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.htm
+    # minute [0,59]
+    # hour [0,23]
+    # day of the month [1,31]
+    # month of the year [1,12]
+    # day of the week ([0,6] with 0=sunday)
+    #
+    # 04:00 nyc - 08:00/09:00 utc
+    # 09:30 nyc - 13:30/14:30 utc
+    # 13:00 nyc - 17:00/18:00 utc
+    # 16:00 nyc - 20:00/21:00 utc
+    # 20:00 nyc - 00:00/01:00 utc
+    #
+    - cron: "30 1,11-21 * * 1-6"
+  workflow_dispatch:
+env:
+  MY_GITHUB_REPOSITORY: kaizhu256/betadog
+  MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+jobs:
+  job1:
+    # runs-on: macos-latest
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          sh -c "uname -a"
+          echo "$(date -u +"%Y-%m-%d %TZ") - ${{ github.triggering_actor }}"
+      # https://github.com/actions/checkout
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.MY_GITHUB_REPOSITORY }}
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
+      # https://github.com/actions/setup-node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # https://github.com/actions/setup-python
+      - uses: actions/setup-python@v5
+        with:
+          cache: "pip"
+          python-version: "3.10"
+      # cleanup repo
+      - run: git config --global user.email "betadog-eod@example.com"
+      - run: git config --global user.name "betadog-eod"
+      - run: sh jslint_ci.sh shGitCommitPushOrSquash2 "" 100 nobackup
+      # run cron
+      - run: sh jslint_ci.sh shCronCustom
+    
