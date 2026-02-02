@@ -21,7 +21,7 @@ on:
     # 16:00 nyc - 20:00/21:00 utc
     # 20:00 nyc - 00:00/01:00 utc
     #
-    - cron: "30 1,11-21 * * 1-6"
+    - cron: "05 1,11-21 * * 1-6"
   workflow_dispatch:
 env:
   MY_GITHUB_REPOSITORY: kaizhu256/betadog
