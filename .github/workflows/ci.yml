@@ -35,16 +35,16 @@ jobs:
           sh -c "uname -a"
           echo "$(date -u +"%Y-%m-%d %TZ") - ${{ github.triggering_actor }}"
       # https://github.com/actions/checkout
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           repository: ${{ env.MY_GITHUB_REPOSITORY }}
           token: ${{ secrets.MY_GITHUB_TOKEN }}
       # https://github.com/actions/setup-node
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: "24"
       # https://github.com/actions/setup-python
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           cache: "pip"
           python-version: "3.10"
