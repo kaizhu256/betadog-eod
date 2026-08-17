@@ -22,8 +22,8 @@ on:
     # 20:00 nyc - 00:00/01:00 utc
     #
     - cron: "17 11-21 * * 1-5" # cronbod, croneod
-    - cron: "17 23 * * 1-5" # croneoe
-    - cron: "17 0,1 * * 2-6" # croneoe
+    # - cron: "17 23 * * 1-5" # croneoe
+    # - cron: "17 0,1 * * 2-6" # croneoe
   workflow_dispatch:
 env:
   MY_GITHUB_REPOSITORY: kaizhu256/betadog
