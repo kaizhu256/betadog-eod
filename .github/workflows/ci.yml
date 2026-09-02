@@ -21,7 +21,8 @@ on:
     # 16:00 nyc - 20:00/21:00 utc
     # 20:00 nyc - 00:00/01:00 utc
     #
-    - cron: "17 7-17 * * 1-5" # cronbod, croneod
+    - cron: "17 0-23 * * 1-5" # cronbod, croneod
+    # - cron: "17 7-17 * * 1-5" # cronbod, croneod
       timezone: "America/New_York"
     # - cron: "17 11-21 * * 1-5" # cronbod, croneod
     # - cron: "17 23 * * 1-5" # croneoe
