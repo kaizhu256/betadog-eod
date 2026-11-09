@@ -46,7 +46,7 @@ jobs:
       # https://github.com/actions/setup-node
       - uses: actions/setup-node@v5
         with:
-          node-version: "24"
+          node-version: "26"
       # https://github.com/actions/setup-python
       - uses: actions/setup-python@v6
         with:
